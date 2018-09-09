@@ -74,6 +74,8 @@ namespace GoogleARCore.Examples.CloudAnchors
         /// </summary>
         public Toggle ResolveOnDeviceToggle;
 
+        public DatabaseHandlerScript databaseHandler;
+
         /// <summary>
         /// The Unity Start() method.
         /// </summary>
@@ -254,6 +256,7 @@ namespace GoogleARCore.Examples.CloudAnchors
 #else
             ipAddress = Network.player.ipAddress;
 #endif
+            databaseHandler.SetIPValue(ipAddress);
             return ipAddress;
         }
     }

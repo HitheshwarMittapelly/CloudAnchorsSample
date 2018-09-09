@@ -48,6 +48,8 @@ namespace GoogleARCore.Examples.CloudAnchors
         /// </summary>
         public CloudAnchorUIController UIController;
 
+        public DatabaseHandlerScript databaseHandler;
+
         [Header("ARCore")]
 
         /// <summary>
@@ -221,6 +223,7 @@ namespace GoogleARCore.Examples.CloudAnchors
             m_CurrentMode = ApplicationMode.Hosting;
             m_CurrentRoom = Random.Range(1, 9999);
             UIController.SetRoomTextValue(m_CurrentRoom);
+            databaseHandler.AddRoomValue(m_CurrentRoom);
             UIController.ShowHostingModeBegin();
         }
 

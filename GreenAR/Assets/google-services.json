@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "771188185404",
+    "firebase_url": "https://greenar-c9b8e.firebaseio.com",
+    "project_id": "greenar-c9b8e",
+    "storage_bucket": "greenar-c9b8e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771188185404:android:87cbbd2660d0e6c7",
+        "android_client_info": {
+          "package_name": "com.greenar.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771188185404-nr9edjuu6jegeml7vo15kf9pi4ij3drn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUFX9bzIho62GaNXgiX5w4FeIxyDBEnKI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
