@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114763659061327982}
   m_Layer: 0
   m_Name: CloudAnchorController
-  m_TagString: Untagged
+  m_TagString: CloudController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoomSharingServer: {fileID: 114763659061327982}
   UIController: {fileID: 0}
+  databaseHandler: {fileID: 0}
   ARCoreRoot: {fileID: 0}
   ARCoreAndyAndroidPrefab: {fileID: 191266, guid: c44bd9bdc114d4a60932c0087d9d1732,
     type: 2}
@@ -72,3 +73,4 @@ MonoBehaviour:
   ARKitFirstPersonCamera: {fileID: 0}
   ARKitAndyAndroidPrefab: {fileID: 1190091649889860, guid: 63e9325810cb14b9e8e0590d57d87afb,
     type: 2}
+  m_CurrentMode: 0

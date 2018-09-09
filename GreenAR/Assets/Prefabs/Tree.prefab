@@ -101,3 +101,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   databaseHandler: {fileID: 114772644233400972, guid: 0d2253d4098a62f4f9d3acc7ebd4e4a3,
     type: 2}
+  cloudAnchorController: {fileID: 114879623378436126, guid: ca2a8ae4449cc274cb89e62538da461f,
+    type: 2}

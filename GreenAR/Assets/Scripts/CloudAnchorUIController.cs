@@ -49,6 +49,8 @@ namespace GoogleARCore.Examples.CloudAnchors
         /// </summary>
         public Button HostAnchorModeButton;
 
+        public GameObject TreeScaleButton;
+
         /// <summary>
         /// The resolve anchor mode button.
         /// </summary>
@@ -153,8 +155,8 @@ namespace GoogleARCore.Examples.CloudAnchors
             {
                 SnackbarText.text = snackbarText;
             }
-
-            InputRoot.SetActive(true);
+            //ShowResolvingModeAttemptingResolve();
+            //InputRoot.SetActive(true);
         }
 
         /// <summary>
@@ -181,6 +183,7 @@ namespace GoogleARCore.Examples.CloudAnchors
             ResolveAnchorModeButton.interactable = true;
             SnackbarText.text = "The anchor was successfully resolved.";
             InputRoot.SetActive(false);
+            TreeScaleButton.SetActive(true);
         }
 
         /// <summary>

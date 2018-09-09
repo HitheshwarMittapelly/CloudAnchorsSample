@@ -208,6 +208,9 @@
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>/Users/deb/UnityProjects/GreenAR/GreenAR/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>/Users/deb/UnityProjects/GreenAR/GreenAR/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>/Users/deb/UnityProjects/GreenAR/GreenAR/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>

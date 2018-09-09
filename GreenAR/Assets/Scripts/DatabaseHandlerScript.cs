@@ -135,9 +135,9 @@ public class DatabaseHandlerScript : MonoBehaviour {
 
         // Now we add the new score as a new entry that contains the email address and score.
       
-        newNameMap["hitCounter"] =hitCounter;
+        //newNameMap["hitCounter"] =hitCounter;
        
-        newNameMap["scale"] = treeScale;
+        //newNameMap["scale"] = treeScale;
         newNameMap["Room"] = roomNumber;
         newNameMap["IP"] = IPAddress;
         newNameMap["playerName"] = playerName;

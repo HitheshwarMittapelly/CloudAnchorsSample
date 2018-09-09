@@ -119,6 +119,7 @@ namespace GoogleARCore.CrossPlatform
             transform.position = pose.position;
             transform.rotation = pose.rotation;
 
+
             var currentFrameTrackingState = TrackingState;
             if (m_LastFrameTrackingState != currentFrameTrackingState)
             {

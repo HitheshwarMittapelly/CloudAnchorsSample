@@ -26,6 +26,9 @@ namespace GoogleARCore.Examples.CloudAnchors
     using GoogleARCore.Examples.Common;
     using UnityEngine;
     using UnityEngine.UI;
+    using Firebase;
+    using Firebase.Database;
+    using Firebase.Unity.Editor;
 
 #if UNITY_EDITOR
     // Set up touch input propagation while using Instant Preview in the editor.
@@ -114,12 +117,16 @@ namespace GoogleARCore.Examples.CloudAnchors
         /// <summary>
         /// The current cloud anchor mode.
         /// </summary>
-        private ApplicationMode m_CurrentMode = ApplicationMode.Ready;
+        public ApplicationMode m_CurrentMode = ApplicationMode.Ready;
 
         /// <summary>
         /// Current local room to attach next Anchor to.
         /// </summary>
         private int m_CurrentRoom;
+        private float treeScale;
+        int roomToResolve = 0;
+        string IP = "";
+        const string document = "Anchors";
 
         /// <summary>
         /// Enumerates modes the example application can be in.
@@ -243,40 +250,81 @@ namespace GoogleARCore.Examples.CloudAnchors
 
             m_CurrentMode = ApplicationMode.Resolving;
             UIController.ShowResolvingModeBegin();
+            OnResolveRoomClick();
         }
 
         /// <summary>
         /// Handles the user intent to resolve the cloud anchor associated with a room they have typed into the UI.
         /// </summary>
-        public void OnResolveRoomClick()
-        {
-            var roomToResolve = UIController.GetRoomInputValue();
-            if (roomToResolve == 0)
-            {
-                UIController.ShowResolvingModeBegin("Anchor resolve failed due to invalid room code.");
-                return;
-            }
+        public void OnResolveRoomClick(){
 
-            UIController.SetRoomTextValue(roomToResolve);
-            string ipAddress =
-                UIController.GetResolveOnDeviceValue() ? k_LoopbackIpAddress : UIController.GetIpAddressInputValue();
 
-            UIController.ShowResolvingModeAttemptingResolve();
-            RoomSharingClient roomSharingClient = new RoomSharingClient();
-            roomSharingClient.GetAnchorIdFromRoom(roomToResolve, ipAddress, (bool found, string cloudAnchorId) =>
+            FirebaseDatabase.DefaultInstance.GetReference("Anchors").LimitToLast(1).GetValueAsync().ContinueWith(task =>
             {
-                if (!found)
+
+                if (task.IsFaulted)
                 {
-                    UIController.ShowResolvingModeBegin("Anchor resolve failed due to invalid room code, " +
-                                                        "ip address or network error.");
+                    Debug.LogError("reference failed");
+                    // Handle the error...
                 }
-                else
+                else if (task.IsCompleted)
                 {
-                    _ResolveAnchorFromId(cloudAnchorId);
+                    Debug.Log("task is complted");
+                    DataSnapshot snapshot = task.Result;
+                    GetSnapShotValues(snapshot);
+
+
+                    UIController.SetRoomTextValue(roomToResolve);
+                    string ipAddress = IP;
+                    //UIController.GetResolveOnDeviceValue() ? k_LoopbackIpAddress : UIController.GetIpAddressInputValue();
+
+                    UIController.ShowResolvingModeAttemptingResolve();
+                    RoomSharingClient roomSharingClient = new RoomSharingClient();
+                    roomSharingClient.GetAnchorIdFromRoom(roomToResolve, ipAddress, (bool found, string cloudAnchorId) =>
+                    {
+                        if (!found)
+                        {
+                            UIController.ShowResolvingModeBegin("Anchor resolve failed due to invalid room code, " +
+                                                                "ip address or network error.");
+                        }
+                        else
+                        {
+                            _ResolveAnchorFromId(cloudAnchorId);
+                        }
+                    });
+
+
+                    //roomToResolve = (int)snapshot.Child("Room").Value;
+                    //IP = snapshot.Child("IP").ToString();
+                    //treeScale = (float)snapshot.Child("scale").Value;
+                    //Debug.Log("Room " + roomToResolve + "\n Ip :" + IP + "\n scale" + treeScale);
+                    // Do something with snapshot...
                 }
+
             });
+
+                //WRITE DATABASE RETRIEVAL LOGIC HERE            //UIController.GetRoomInputValue();
+            //if (roomToResolve == 0)
+            //{
+            //    UIController.ShowResolvingModeBegin("Anchor resolve failed due to invalid room code.");
+            //    return;
+            //}
+
+
         }
 
+        void GetSnapShotValues(DataSnapshot snapshot){
+            foreach (DataSnapshot ss in snapshot.Children)
+            {
+
+                roomToResolve = int.Parse(ss.Child("Room").Value.ToString());
+                IP = ss.Child("IP").Value.ToString();
+                //treeScale = float.Parse(ss.Child("scale").Value.ToString());
+               
+            }
+
+
+        }
         /// <summary>
         /// Hosts the user placed cloud anchor and associates the resulting Id with the current room.
         /// </summary>
@@ -318,9 +366,13 @@ namespace GoogleARCore.Examples.CloudAnchors
                     UIController.ShowResolvingModeBegin(string.Format("Resolving Error: {0}.", result.Response));
                     return;
                 }
+                GameObject prefab = _GetAndyPrefab();
 
                 m_LastResolvedAnchor = result.Anchor;
-                Instantiate(_GetAndyPrefab(), result.Anchor.transform);
+
+                Instantiate(prefab, result.Anchor.transform);
+                //prefab.GetComponent<TreeScript>().updateScale(treeScale);
+                //prefab.transform.localScale = scale;
                 UIController.ShowResolvingModeSuccess();
             }));
         }
