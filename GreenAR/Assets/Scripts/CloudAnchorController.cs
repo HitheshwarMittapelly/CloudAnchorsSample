@@ -225,6 +225,7 @@ namespace GoogleARCore.Examples.CloudAnchors
             UIController.SetRoomTextValue(m_CurrentRoom);
             databaseHandler.AddRoomValue(m_CurrentRoom);
             UIController.ShowHostingModeBegin();
+
         }
 
         /// <summary>

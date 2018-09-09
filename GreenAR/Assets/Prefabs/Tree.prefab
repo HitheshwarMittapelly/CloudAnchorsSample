@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2340482}
   - component: {fileID: 114209088082610174}
   m_Layer: 0
-  m_Name: Oak_Tree
+  m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,3 +99,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ab92aa548b09047b45577f5f4337c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  databaseHandler: {fileID: 114772644233400972, guid: 0d2253d4098a62f4f9d3acc7ebd4e4a3,
+    type: 2}
